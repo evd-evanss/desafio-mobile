@@ -1,0 +1,23 @@
+# Pasta de builds de todos os níveis
+build/
+*/build/
+
+# Configurações do Android Studio e IntelliJ
+.idea/
+*.iml
+*.iws
+.gradle/
+local.properties
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos gerados pelo Android
+captures/
+.externalNativeBuild
+.cxx
+output.json
+
+# Log de erros
+*.log

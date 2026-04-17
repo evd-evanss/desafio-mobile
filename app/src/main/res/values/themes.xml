@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style
+        name="Theme.DesafioMobile"
+        parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">#222222</item>
+        <item name="android:statusBarColor">#222222</item>
+    </style>
+</resources>
