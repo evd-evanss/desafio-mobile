@@ -42,7 +42,6 @@ O projeto foi estruturado seguindo os princípios de **Clean Architecture** e **
 
 Durante o desenvolvimento, alguns pontos foram observados:
 
-*   **Dependência de Contexto no Módulo de Rede**: O módulo `:network` necessita de um `androidContext` para inicializar o Chucker. Isso cria uma dependência implícita de que o módulo `:app` forneça o contexto corretamente via Koin. Para falhas graves de segurança ou bugs impeditivos, favor acionar por e-mail.
 *   **Hardcoded URLs**: Atualmente, as URLs da API estão diretamente na classe de serviço. Em um cenário de produção, estas seriam movidas para variáveis de ambiente via `BuildConfig`.
 
 ---
