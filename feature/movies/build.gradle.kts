@@ -34,7 +34,7 @@ android {
     }
     kotlin {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
         }
     }
     buildFeatures {
@@ -61,5 +61,12 @@ dependencies {
     // Koin
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
-    implementation(libs.koin.compose.viewmodel) // C
+    implementation(libs.koin.compose.viewmodel)
+
+    // Unit Tests
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlin.coroutines.test)
+    testImplementation(libs.turbine)
+    testImplementation(libs.truth)
 }

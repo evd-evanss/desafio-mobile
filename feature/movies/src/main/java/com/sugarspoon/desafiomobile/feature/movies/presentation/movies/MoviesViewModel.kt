@@ -1,8 +1,7 @@
 package com.sugarspoon.desafiomobile.feature.movies.presentation.movies
 
 import androidx.lifecycle.viewModelScope
-import com.sugarspoon.desafiomobile.commons.StateEffectViewModel
-import com.sugarspoon.desafiomobile.commons.UiEffect
+import com.sugarspoon.desafiomobile.commons.StateViewModel
 import com.sugarspoon.desafiomobile.commons.UiState
 import com.sugarspoon.desafiomobile.feature.movies.domain.Resource
 import com.sugarspoon.desafiomobile.feature.movies.domain.model.MovieItem
@@ -13,9 +12,7 @@ private const val NO_INTERNET_ERROR = "No internet connection"
 
 class MoviesViewModel(
     private val getMovies: GetMoviesUseCase
-) : StateEffectViewModel<MoviesState, MoviesEffect>(
-    MoviesState()
-) {
+) : StateViewModel<MoviesState>(MoviesState()) {
 
     init {
         loadMovies()
@@ -46,7 +43,7 @@ class MoviesViewModel(
         }
     }
 
-    fun dismissNoInternetBottomSheet() {
+    fun dismissWarningBottomSheet() {
         setState { it.copy(isError = false) }
     }
 
@@ -54,6 +51,16 @@ class MoviesViewModel(
         setState {
             it.filterMovies(
                 selectedTab = tab,
+            )
+        }
+    }
+
+    fun onSearchChanged(query: String) {
+        setState {
+            it.copy(
+                filterMovies = it.movies.filter { movie ->
+                    movie.title.contains(query, ignoreCase = true)
+                }
             )
         }
     }
@@ -108,8 +115,4 @@ data class MoviesState(
             filterMovies = filterMovies,
         )
     }
-}
-
-sealed class MoviesEffect : UiEffect {
-    data object ShowNoInternetError : MoviesEffect()
 }

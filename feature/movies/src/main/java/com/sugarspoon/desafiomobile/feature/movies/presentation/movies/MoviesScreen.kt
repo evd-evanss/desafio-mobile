@@ -41,7 +41,8 @@ fun MoviesScreen(
                 tabLeft = stringResource(MoviesTabs.LATEST_PREMIERES.title),
                 tabRight = stringResource(MoviesTabs.COMING_SOON.title),
                 selectedTab = state.selectedTab,
-                onTabSelected = { viewModel.selectTab(it) }
+                onTabSelected = { viewModel.selectTab(it) },
+                onSearchChanged = viewModel::onSearchChanged
             )
             Text(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
@@ -77,7 +78,7 @@ fun MoviesScreen(
         WarningBottomSheet(
             title = stringResource(state.warning.title),
             description = stringResource(state.warning.description),
-            onDismiss = viewModel::dismissNoInternetBottomSheet,
+            onDismiss = viewModel::dismissWarningBottomSheet,
             onRetry = viewModel::loadMovies,
         )
     }
