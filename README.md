@@ -56,4 +56,4 @@ O projeto foca na cobertura da lógica de negócio. Para rodar os testes:
 
 ---
 
-*Nota para o "eu do futuro": A estrutura de State e Effects no módulo `:commons` segue o padrão MVI, garantindo que a UI apenas reaja a estados imutáveis disparados pela ViewModel.*
+*Nota para o "eu do futuro": A estrutura de State no módulo `:commons` segue o padrão MVI, garantindo que a UI apenas reaja a estados imutáveis disparados pela ViewModel.*
