@@ -2,6 +2,7 @@ package com.sugarspoon.desafiomobile
 
 import android.app.Application
 import android.content.Context
+import com.sugarspoon.desafiomobile.commons.observability.AppTracker
 import com.sugarspoon.desafiomobile.feature.movies.di.Movies
 import com.sugarspoon.desafiomobile.network.di.Network
 import org.koin.android.ext.koin.androidContext
@@ -19,5 +20,6 @@ open class MoviesApp: Application() {
         super.onCreate()
         Network.inject()
         Movies.inject()
+        AppTracker.trackEvent("Application Started")
     }
 }

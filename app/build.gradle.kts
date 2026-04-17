@@ -49,6 +49,7 @@ dependencies {
     implementation(project(":feature:movies"))
     implementation(project(":ds"))
     implementation(project(":network"))
+    implementation(project(":commons"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

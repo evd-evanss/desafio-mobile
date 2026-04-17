@@ -21,7 +21,7 @@ O projeto foi estruturado seguindo os princípios de **Clean Architecture** e **
 
 ### 1. Modularização por Camadas e Features
 *   **`:app`**: Orquestrador central, contém a classe `Application` e a configuração de navegação.
-*   **`:feature:movies` / `:feature:splash`**: Módulos independentes para cada fluxo de negócio. Isso isola o escopo de compilação e facilita o trabalho em equipe.
+*   **`:feature`**: Módulos independentes para cada fluxo de negócio. Isso isola o escopo de compilação e facilita o trabalho em equipe.
 *   **`:network`**: Centraliza a infraestrutura de rede, evitando que detalhes de implementação do Ktor vazem para as camadas de domínio.
 *   **`:commons`**: Contém classes base (ViewModel, State) e extensões compartilhadas entre as features.
 *   **`:ds` (Design System)**: Centraliza componentes de UI, cores, fontes e Shimmers para garantir consistência visual.

@@ -3,6 +3,7 @@ package com.sugarspoon.desafiomobile.feature.movies.presentation.movies
 import androidx.lifecycle.viewModelScope
 import com.sugarspoon.desafiomobile.commons.StateViewModel
 import com.sugarspoon.desafiomobile.commons.UiState
+import com.sugarspoon.desafiomobile.commons.observability.AppTracker
 import com.sugarspoon.desafiomobile.feature.movies.domain.Resource
 import com.sugarspoon.desafiomobile.feature.movies.domain.model.MovieItem
 import com.sugarspoon.desafiomobile.feature.movies.domain.usecase.GetMoviesUseCase
@@ -16,6 +17,18 @@ class MoviesViewModel(
 
     init {
         loadMovies()
+        AppTracker.trackEvent("viu: tela de filmes")
+    }
+
+    fun tryAgain() {
+        AppTracker.trackEvent("clicou: tentar novamente")
+        loadMovies()
+    }
+
+    fun onRefresh() {
+        AppTracker.trackEvent("pushou: atualizar")
+        setState { it.clear() }
+        loadMovies()
     }
 
     fun loadMovies() {
@@ -24,6 +37,7 @@ class MoviesViewModel(
             when (val result = getMovies()) {
                 is Resource.Success -> {
                     setState { it.setMovies(result.data.items) }
+                    AppTracker.trackEvent("carregou filmes")
                 }
                 is Resource.Error -> {
                     val warningType = if (result.message == NO_INTERNET_ERROR) {
@@ -37,6 +51,7 @@ class MoviesViewModel(
                             warning = warningType,
                         )
                     }
+                    AppTracker.trackEvent("viu erro: ${result.message}")
                 }
             }
             setState { it.copy(isLoading = false) }
@@ -53,6 +68,9 @@ class MoviesViewModel(
                 selectedTab = tab,
             )
         }
+        AppTracker.trackEvent(
+            "clicou: ${tab.lowercase()}",
+        )
     }
 
     fun onSearchChanged(query: String) {
@@ -115,4 +133,14 @@ data class MoviesState(
             filterMovies = filterMovies,
         )
     }
+
+    fun clear() =
+        copy(
+            selectedTab = MoviesTabs.COMING_SOON.tag,
+            isError = false,
+            isLoading = false,
+            movies = emptyList(),
+            filterMovies = emptyList(),
+            tabs = MoviesTabs.COMING_SOON
+        )
 }

@@ -31,7 +31,7 @@ fun MoviesSplashScreen(
             animationSpec = tween(durationMillis = 1000)
         )
 
-        delay(1000)
+        delay(500)
 
         onTimeout()
     }

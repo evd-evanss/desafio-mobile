@@ -1,5 +1,6 @@
 package com.sugarspoon.desafiomobile.feature.movies.domain.usecase
 
+import com.sugarspoon.desafiomobile.commons.observability.AppTracker
 import com.sugarspoon.desafiomobile.feature.movies.domain.Resource
 import com.sugarspoon.desafiomobile.feature.movies.domain.model.Movies
 import com.sugarspoon.desafiomobile.feature.movies.domain.repositoy.MoviesRepository
@@ -16,6 +17,10 @@ class GetMoviesUseCase(
         return try {
             Resource.Success(repository.getMovies())
         } catch (e: Exception) {
+            AppTracker.trackNetworkError(
+                error = "$e",
+                message = e.message ?: UNKNOWN_ERROR
+            )
             when (e) {
                 is UnknownHostException,
                 is SocketTimeoutException -> {
