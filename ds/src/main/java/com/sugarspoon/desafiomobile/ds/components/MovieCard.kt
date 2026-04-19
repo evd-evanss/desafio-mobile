@@ -25,12 +25,13 @@ import com.sugarspoon.desafiomobile.ds.theme.BackgroundDark
 
 @Composable
 fun MovieCard(
+    modifier: Modifier,
     title: String? = null,
     url: String? = null,
     badgeText: String? = null,
 ) {
     Card(
-        modifier = Modifier.padding(8.dp).fillMaxWidth(),
+        modifier = modifier.padding(8.dp).fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(4.dp)
     ) {

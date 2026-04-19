@@ -1,39 +1,32 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
+    id("com.android.library")
 }
 
 android {
-    namespace = "com.sugarspoon.desafiomobile"
+    namespace = "com.sugarspoon.desafiomobile.feature.home"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.sugarspoon.desafiomobile"
         minSdk = 24
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
-
+        lint.targetSdk = 36
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-
     }
     kotlin {
         compilerOptions {
@@ -46,10 +39,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":feature:home"))
-    implementation(project(":ds"))
     implementation(project(":network"))
     implementation(project(":commons"))
+    implementation(project(":ds"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -60,15 +52,23 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     
+    // Navigation
+    implementation(libs.androidx.navigation.compose)
+    
+    // Ktor
+    implementation(libs.ktor.client.core)
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:13.0.0")
+    
     // Koin
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
-    
+    implementation(libs.koin.compose.viewmodel)
+
+    // Unit Tests
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlin.coroutines.test)
+    testImplementation(libs.turbine)
+    testImplementation(libs.truth)
+    debugImplementation(libs.androidx.ui.tooling)
 }

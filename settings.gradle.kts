@@ -22,6 +22,6 @@ dependencyResolutionManagement {
 rootProject.name = "DesafioMobile"
 include(":app")
 include(":network")
-include(":feature:movies")
+include(":feature:home")
 include(":commons")
 include(":ds")
